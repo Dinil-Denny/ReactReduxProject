@@ -1,3 +1,5 @@
+//auth slice is responsible for managing authentication.
+//It initializes state based on the presence of userInfo in localStorage (to persist login status across refreshes).
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -13,7 +15,7 @@ const authSlice = createSlice({
             //setting userInfo to the state
             state.userInfo = action.payload;
             //setting userInfo to local storage after strigifying it
-            localStorage.setItem('userInfo',JSON.stringify(action.payload))
+            localStorage.setItem('userInfo',JSON.stringify(action.payload));
         },
         clearCredentials:(state,action)=>{
             //clearing user info in state
