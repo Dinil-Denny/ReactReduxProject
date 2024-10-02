@@ -1,11 +1,11 @@
-//@des help us to avoid using try catch block inside the async funtion. This will handle everything by itself
+//@desc - help us to avoid using try catch block inside the async funtion. This will handle everything by itself
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 
-//@desc auth user/set token - login
+//@desc - auth user/set token - login
 //route POST request to /api/users/auth
-//@access public
+//@access - public
 const authUser = asyncHandler(async (req, res) => {
     const {email,password} = req.body;
     const user = await User.findOne({email});
@@ -70,13 +70,21 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     if(user){
         user.name = req.body.name || user.name;
         user.email = req.body.email || user.email;
-
         if(req.body.password){
             user.password = req.body.password;
         }
+        if(req.file){
+          user.profileImage = req.file.filename
+        }
+
         const updatedUser = await user.save();
 
-        res.status(200).json({_id:updatedUser._id,name:updatedUser.name,email:updatedUser.email});
+        res.status(200).json({
+          _id:updatedUser._id,
+          name:updatedUser.name,
+          email:updatedUser.email,
+          profileImage:updatedUser.profileImage,
+        });
     }else{
         res.status(404);
         throw new Error('User not found');

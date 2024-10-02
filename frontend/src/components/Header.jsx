@@ -1,4 +1,4 @@
-import { Navbar, Nav, Container, NavDropdown, Badge } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown, Badge, Image } from "react-bootstrap";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import {LinkContainer} from 'react-router-bootstrap';
 import { useSelector, useDispatch } from "react-redux";
@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const {userInfo} = useSelector((state)=>state.auth);
+
+  console.log("userInfo: ",userInfo);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,6 +26,9 @@ const Header = () => {
     }
   }
 
+  // const imageBaseURL = 'http://localhost:5000/uploads/'
+  // console.log(`${imageBaseURL}${userInfo.profileImage}`);
+
   return (
     <header>
       <Navbar bg="warning" variant="warning" expand="lg" collapseOnSelect>
@@ -36,7 +41,26 @@ const Header = () => {
             <Nav className="ms-auto">
               {userInfo ? (
                 <>
-                  <NavDropdown title={userInfo.name} id="username">
+                  <NavDropdown title={
+                    <span>
+                      {/* {userInfo.profileImage ? (
+                        <Image 
+                          src={`${imageBaseURL}${userInfo.profileImage}`}
+                          roundedCircle
+                          //alt="profileImg"
+                          style={{width:'40px', height:'40px',objectFit:'cover'}}
+                        ></Image>
+                      ) : (
+                        <Image
+                          src="http://localhost:5000/uploads/dummyProfileImg.jpg"
+                          roundedCircle
+                          //alt="profileImg"
+                          style={{ width: '40px', height: '40px', objectFit: 'cover'}}
+                        ></Image>
+                      )}  */}
+                      <span className="ms-2">{userInfo.name}</span>
+                    </span>
+                  } id="username">
                     <LinkContainer to={'/profile'}>
                       <NavDropdown.Item>
                         Profile
@@ -59,7 +83,6 @@ const Header = () => {
                 </Nav.Link> */}
                 </>
               )}
-              
             </Nav>
           </Navbar.Collapse>
         </Container>

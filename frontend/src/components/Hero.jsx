@@ -10,14 +10,14 @@ const Hero = () => {
             MERN authentication app using JWT authentication, Redux Toolkit and the React
             Bootstrap library
           </p>
-          <div className='d-flex'>
+          {/* <div className='d-flex'>
             <Button variant='primary' href='/login' className='me-3'>
               Sign In
             </Button>
             <Button variant='secondary' href='/register'>
               Sign Up
             </Button>
-          </div>
+          </div> */}
         </Card>
       </Container>
     </div>

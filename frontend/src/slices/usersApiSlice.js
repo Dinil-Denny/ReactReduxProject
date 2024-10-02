@@ -12,10 +12,24 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 body: data
             })
         }),
+        register: builder.mutation({
+            query: (data) => ({
+                url:`${USERS_URL}`,
+                method: 'POST',
+                body: data
+            })
+        }),
         logout: builder.mutation({
             query: () => ({
                 url: `${USERS_URL}/logout`,
                 method: 'POST',
+            })
+        }),
+        updateUser: builder.mutation({
+            query: (data) => ({
+                url: `${USERS_URL}/profile`,
+                method: 'PUT',
+                body: data,
             })
         })
     })
@@ -24,4 +38,4 @@ export const userApiSlice = apiSlice.injectEndpoints({
 //there is a specific convention in exporting the mutations and queries.
 // for mutations -> use-NameOfMutation-Mutation 
 // for query -> use-NameOfQuery-Query
-export const {useLoginMutation,useLogoutMutation} = userApiSlice;
+export const {useLoginMutation,useLogoutMutation,useRegisterMutation,useUpdateUserMutation} = userApiSlice;
